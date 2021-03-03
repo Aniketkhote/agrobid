@@ -3,7 +3,7 @@ export './splash_screen/splash_screen.dart';
 export './bid_screen/bid_screen.dart';
 export './home_screen/home_screen.dart';
 export './login_screen/login_screen.dart';
-export './my_product_screen/my_product.dart';
+export './my_product_screen/my_product_screen.dart';
 export './my_bid_screen/my_bid_screen.dart';
 export './new_product_screen/new_product_screen.dart';
 export './product_detail_screen/product_detail_screen.dart';

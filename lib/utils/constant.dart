@@ -1,9 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 //Main Colors
 Color colorPrimary = Color(0xFF8739F9);
-Color colorSeondary = Color(0xFF37B9F1);
+Color colorSecondary = Color(0xFF37B9F1);
 Color colorTertiary = Color(0xFFF2F5F5);
+
+Color colorPrimaryLight = Color(0xFF8739F9).withOpacity(.1);
+Color colorSecondaryLight = Color(0xFF37B9F1).withOpacity(.1);
+Color colorTertiaryLight = Color(0xFFF2F5F5).withOpacity(.1);
 
 //Font Colors
 Color colorText = Color(0xFF565360);
@@ -16,9 +23,9 @@ Color colorDanger = Color(0xFFDE5050);
 Color colorSuccess = Color(0xFF37BC64);
 
 //Light Status Colors
-Color colorWarningLight = Color(0xFFFF8DE);
+Color colorWarningLight = Color(0xFFFFF8DE);
 Color colorDangerLight = Color(0xFFFFF3F3);
-Color colorSuccessLigth = Color(0xFFE2F8E9);
+Color colorSuccessLight = Color(0xFFE2F8E9);
 
 //Small Length
 double sm1 = 4;
@@ -46,17 +53,31 @@ FontWeight fwSemiBold = FontWeight.w600;
 FontWeight fwBold = FontWeight.w800;
 
 //TextStyle
-TextStyle textStyleTitle =
-    TextStyle(color: Colors.black, fontSize: md2, fontWeight: fwBold);
-TextStyle textStyleLabel =
-    TextStyle(color: Colors.black, fontSize: md1, fontWeight: fwSemiBold);
-TextStyle textStyleCaption =
-    TextStyle(color: Colors.black, fontSize: sm3, fontWeight: fwNormal);
+TextStyle styleTitle =
+    TextStyle(fontWeight: fwBold, color: colorText, fontSize: md1);
+TextStyle subhead = Get.textTheme.subtitle1;
+TextStyle caption = Get.textTheme.caption;
+TextStyle headline = Get.textTheme.headline5;
+TextStyle overline = Get.textTheme.overline;
 
 //BorderRadius
 BorderRadius borderRounded = BorderRadius.circular(10);
 BorderRadius borderCircular = BorderRadius.circular(30);
 
 //Decoration
-Decoration decorationRounded = BoxDecoration(borderRadius: borderRounded);
-Decoration decorationCircular = BoxDecoration(borderRadius: borderCircular);
+Decoration decorationRounded = BoxDecoration(
+  borderRadius: borderRounded,
+  color: colorTertiary,
+  boxShadow: [
+    BoxShadow(
+      blurRadius: 5,
+      spreadRadius: 2,
+      offset: Offset(0, 2),
+      color: colorLabel.withOpacity(.4),
+    )
+  ],
+);
+Decoration decorationCircular = BoxDecoration(
+  borderRadius: borderCircular,
+  color: colorTertiary,
+);

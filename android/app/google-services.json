@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "185962393176",
+    "project_id": "agrobid-93a26",
+    "storage_bucket": "agrobid-93a26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185962393176:android:c3d3789b183539bfbfe42d",
+        "android_client_info": {
+          "package_name": "com.example.agrobid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185962393176-hv2qo3ss04vve1tibath4n74opcff2kd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agrobid",
+            "certificate_hash": "098497058b31eb39c2a3792ae964a73f30a356ac"
+          }
+        },
+        {
+          "client_id": "185962393176-fjbhh4ou2gjr2gfqmpo1hc2aluqm17qd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBexsrGeBM_UdBsv9bxDNUWC5YJywKo8eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185962393176-fjbhh4ou2gjr2gfqmpo1hc2aluqm17qd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
