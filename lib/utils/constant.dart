@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +15,9 @@ Color colorTertiaryLight = Color(0xFFF2F5F5).withOpacity(.1);
 Color colorText = Color(0xFF565360);
 Color colorLabel = Color(0xFF908E9B);
 Color colorDisabled = Color(0xFFE1DFE9);
+
+//TextField Colors
+Color colorTextField = Color(0xFFEFEFF0);
 
 //Status Colors
 Color colorWarning = Color(0xFFF9AE3F);
@@ -55,7 +57,8 @@ FontWeight fwBold = FontWeight.w800;
 //TextStyle
 TextStyle styleTitle =
     TextStyle(fontWeight: fwBold, color: colorText, fontSize: md1);
-TextStyle subhead = Get.textTheme.subtitle1;
+TextStyle styleLabel =
+    TextStyle(fontWeight: FontWeight.w500, color: colorText, fontSize: 15);
 TextStyle caption = Get.textTheme.caption;
 TextStyle headline = Get.textTheme.headline5;
 TextStyle overline = Get.textTheme.overline;

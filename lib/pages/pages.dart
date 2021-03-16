@@ -7,5 +7,4 @@ export './my_product_screen/my_product_screen.dart';
 export './my_bid_screen/my_bid_screen.dart';
 export './new_product_screen/new_product_screen.dart';
 export './product_detail_screen/product_detail_screen.dart';
-export './product_screen/product_screen.dart';
 export './profile_screen/profile_screen.dart';

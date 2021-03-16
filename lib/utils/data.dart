@@ -1,3 +1,5 @@
+import 'package:agrobid/models/bidder_model.dart';
+import 'package:agrobid/models/unit_model.dart';
 import 'package:agrobid/models/variety_model.dart';
 import 'package:agrobid/widgets/widgets.dart';
 
@@ -44,6 +46,12 @@ List<VarietyModel> varietyList = [
   VarietyModel(id: "5", name: "Honeycrisp"),
   VarietyModel(id: "6", name: "Sunehari"),
   VarietyModel(id: "7", name: " Red Delicious"),
+];
+
+List<UnitModel> unitList = [
+  UnitModel(id: "0", name: "Kilogram", code: "kg"),
+  UnitModel(id: "1", name: "Dozen", code: "dzn"),
+  UnitModel(id: "2", name: "Caret", code: "ca"),
 ];
 
 List<UserModel> userList = [
@@ -106,10 +114,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "0",
     title: "Fresh Mangoes",
-    discription: "Get a fresh mangoes in a reasonable price 100/kg.",
+    detail: "Get a fresh mangoes in a reasonable price 100/kg.",
     date: "01/01/2021",
     startingPrice: 100,
-    averagePrice: 120,
+    currentPrice: 120,
     category: categoryList[0].name,
     subcategory: subcategoryList[0].name,
     variety: varietyList[0].name,
@@ -120,10 +128,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "1",
     title: "Buy apples in bulk and get discound",
-    discription: "Get a fresh apples in a bulk and super discound.",
+    detail: "Get a fresh apples in a bulk and super discound.",
     date: "17/02/2021",
     startingPrice: 150,
-    averagePrice: 200,
+    currentPrice: 200,
     category: categoryList[0].name,
     subcategory: subcategoryList[1].name,
     variety: varietyList[6].name,
@@ -134,10 +142,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "0",
     title: "Fresh Mangoes",
-    discription: "Get a fresh mangoes in a reasonable price 100/kg.",
+    detail: "Get a fresh mangoes in a reasonable price 100/kg.",
     date: "01/01/2021",
     startingPrice: 100,
-    averagePrice: 120,
+    currentPrice: 120,
     category: categoryList[0].name,
     subcategory: subcategoryList[0].name,
     variety: varietyList[0].name,
@@ -148,10 +156,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "1",
     title: "Buy apples in bulk and get discound",
-    discription: "Get a fresh apples in a bulk and super discound.",
+    detail: "Get a fresh apples in a bulk and super discound.",
     date: "17/02/2021",
     startingPrice: 150,
-    averagePrice: 200,
+    currentPrice: 200,
     category: categoryList[0].name,
     subcategory: subcategoryList[1].name,
     variety: varietyList[6].name,
@@ -162,10 +170,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "0",
     title: "Fresh Mangoes",
-    discription: "Get a fresh mangoes in a reasonable price 100/kg.",
+    detail: "Get a fresh mangoes in a reasonable price 100/kg.",
     date: "01/01/2021",
     startingPrice: 100,
-    averagePrice: 120,
+    currentPrice: 120,
     category: categoryList[0].name,
     subcategory: subcategoryList[0].name,
     variety: varietyList[0].name,
@@ -176,10 +184,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "1",
     title: "Buy apples in bulk and get discound",
-    discription: "Get a fresh apples in a bulk and super discound.",
+    detail: "Get a fresh apples in a bulk and super discound.",
     date: "17/02/2021",
     startingPrice: 150,
-    averagePrice: 200,
+    currentPrice: 200,
     category: categoryList[0].name,
     subcategory: subcategoryList[1].name,
     variety: varietyList[6].name,
@@ -190,10 +198,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "0",
     title: "Fresh Mangoes",
-    discription: "Get a fresh mangoes in a reasonable price 100/kg.",
+    detail: "Get a fresh mangoes in a reasonable price 100/kg.",
     date: "01/01/2021",
     startingPrice: 100,
-    averagePrice: 120,
+    currentPrice: 120,
     category: categoryList[0].name,
     subcategory: subcategoryList[0].name,
     variety: varietyList[0].name,
@@ -204,10 +212,10 @@ List<ProductModel> productList = [
   ProductModel(
     id: "1",
     title: "Buy apples in bulk and get discound",
-    discription: "Get a fresh apples in a bulk and super discound.",
+    detail: "Get a fresh apples in a bulk and super discound.",
     date: "17/02/2021",
     startingPrice: 150,
-    averagePrice: 200,
+    currentPrice: 200,
     category: categoryList[0].name,
     subcategory: subcategoryList[1].name,
     variety: varietyList[6].name,
@@ -215,6 +223,29 @@ List<ProductModel> productList = [
         "https://i1.wp.com/www.globaltrademag.com/wp-content/uploads/2020/02/Untitled-design-1.jpg?fit=699%2C393&ssl=1",
     user: userList[2].id,
   ),
+];
+
+List<BidderModel> bidderList = [
+  BidderModel(
+      id: "0", user: userList[1].id, biddingPrice: "150", date: "01h 34m"),
+  BidderModel(
+      id: "1", user: userList[2].id, biddingPrice: "70", date: "02h 04m"),
+  BidderModel(
+      id: "2", user: userList[3].id, biddingPrice: "90", date: "01h 44m"),
+  BidderModel(
+      id: "3", user: userList[3].id, biddingPrice: "111", date: "01h 34m"),
+  BidderModel(
+      id: "4", user: userList[2].id, biddingPrice: "120", date: "00h 3m"),
+  BidderModel(
+      id: "5", user: userList[3].id, biddingPrice: "97", date: "02h 01m"),
+  BidderModel(
+      id: "6", user: userList[0].id, biddingPrice: "80", date: "03h 32m"),
+  BidderModel(
+      id: "7", user: userList[1].id, biddingPrice: "88", date: "03h 27m"),
+  BidderModel(
+      id: "8", user: userList[2].id, biddingPrice: "90", date: "05h 09m"),
+  BidderModel(
+      id: "9", user: userList[2].id, biddingPrice: "90", date: "05h 09m"),
 ];
 
 final menuItems = [

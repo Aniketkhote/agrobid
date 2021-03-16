@@ -12,7 +12,7 @@ class UserIcon extends StatelessWidget {
       padding: EdgeInsets.all(1),
       decoration: BoxDecoration(
           border: Border.all(color: colorPrimary),
-          borderRadius: borderCircular),
+          borderRadius: BorderRadius.circular(100)),
       child: CircleAvatar(
         backgroundImage: NetworkImage(userImage ??
             "https://cdn1.iconfinder.com/data/icons/essential-21/128/User-512.png"),

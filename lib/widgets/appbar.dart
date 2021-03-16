@@ -4,29 +4,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-AppBar buildAppBar(
-    {String title, bool automaticallyImplyLeading, List<Widget> actions}) {
+AppBar buildAppBar({
+  String title,
+  Widget widget,
+  bool automaticallyImplyLeading,
+  List<Widget> actions,
+  bool isActions = false,
+}) {
   return AppBar(
+    leading: widget,
     title: Text(
       title ?? "Agrobid".toUpperCase(),
       style: TextStyle(color: colorText, fontSize: 18, fontWeight: fwBold),
     ),
     centerTitle: true,
     automaticallyImplyLeading: automaticallyImplyLeading ?? false,
-    actions: actions ??
-        [
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: GestureDetector(
-              onTap: () => Get.to(() => ChatScreen()),
-              child: SvgPicture.asset(
-                "assets/icons/chat.svg",
-                width: 25,
-                color: colorText,
-              ),
-            ),
-          )
-        ],
+    actions: isActions
+        ? actions ??
+            [
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: GestureDetector(
+                  onTap: () => Get.to(() => ChatScreen()),
+                  child: SvgPicture.asset(
+                    "assets/icons/chat.svg",
+                    width: 25,
+                    color: colorText,
+                  ),
+                ),
+              )
+            ]
+        : List.empty(),
     backgroundColor: Colors.white,
     elevation: 0,
   );
