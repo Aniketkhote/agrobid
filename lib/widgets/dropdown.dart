@@ -1,4 +1,5 @@
 import 'package:agrobid/utils/constant.dart';
+import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +13,8 @@ class CustomDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      margin: FxMargin.my12,
+      padding: FxPadding.px16,
       color: colorTextField,
       child: Obx(
         () => DropdownButtonHideUnderline(

@@ -43,7 +43,7 @@ class ProductDetailScreen extends StatelessWidget {
                             height: 15,
                             indent: 30,
                           ),
-                          buildBidderList(),
+                          buildBidderList(productId: productList[0].id),
                         ],
                       ),
                     ),
@@ -150,35 +150,40 @@ class ProductDetailScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  productList[int.parse(productId)].startingPrice.toString(),
-                  style: headline,
-                ),
-                Text(
-                  "Starting Price",
-                  style: overline.copyWith(fontSize: 14, color: colorLabel),
-                ),
-              ],
+            buildFeatureBox(
+              label: "Starting Price",
+              count:
+                  productList[int.parse(productId)].startingPrice.toString() +
+                      "/" +
+                      unitList[0].code,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  bidderList.length.toString(),
-                  style: headline,
-                ),
-                Text(
-                  "Total Bid",
-                  style: overline.copyWith(fontSize: 14, color: colorLabel),
-                ),
-              ],
+            buildFeatureBox(
+              label: "Minimum Qty",
+              count: bidderList.length.toString() + "/" + unitList[0].code,
+            ),
+            buildFeatureBox(
+              label: "Total Bid",
+              count: bidderList.length,
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildFeatureBox({String label, dynamic count}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          count.toString(),
+          style: headline,
+        ),
+        Text(
+          label,
+          style: overline.copyWith(fontSize: 12, color: colorLabel),
+        ),
+      ],
     );
   }
 

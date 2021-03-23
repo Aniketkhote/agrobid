@@ -78,13 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  customize_flutter:
+  customize:
     dependency: "direct main"
     description:
-      name: customize_flutter
+      name: customize
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -146,7 +146,7 @@ packages:
       name: get
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.25.6"
+    version: "3.26.0"
   http:
     dependency: transitive
     description:

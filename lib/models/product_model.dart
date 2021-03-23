@@ -1,3 +1,5 @@
+import 'package:agrobid/models/bidder_model.dart';
+
 class ProductModel {
   final String id;
   final String title;
@@ -10,8 +12,10 @@ class ProductModel {
   final String category;
   final String subcategory;
   final String variety;
+  final List<BidderModel> biddersList;
 
   ProductModel({
+    this.biddersList,
     this.id,
     this.title,
     this.detail,

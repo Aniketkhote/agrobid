@@ -1,4 +1,5 @@
 import 'package:agrobid/utils/constant.dart';
+import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,14 +10,14 @@ class CustomTextFormField extends StatelessWidget {
   final bool isObscureText;
   final int maxLines;
 
-  const CustomTextFormField(
-      {Key key,
-      this.label,
-      this.hintText,
-      this.controller,
-      this.isObscureText,
-      this.maxLines})
-      : super(key: key);
+  const CustomTextFormField({
+    Key key,
+    this.label,
+    this.hintText,
+    this.controller,
+    this.isObscureText,
+    this.maxLines,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +27,15 @@ class CustomTextFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: styleLabel),
+          Text(label).base.semiBold,
           SizedBox(height: 5),
           TextFormField(
             decoration: InputDecoration(
               border: InputBorder.none,
               filled: true,
-              fillColor: colorTextField,
+              fillColor: FxColors.trueGray100,
               hintText: hintText,
-              hintStyle: TextStyle(color: colorLabel),
+              hintStyle: TextStyle(color: FxColors.blueGray500, fontSize: 14),
             ),
             style: TextStyle(color: colorText),
             obscureText: isObscureText ?? false,

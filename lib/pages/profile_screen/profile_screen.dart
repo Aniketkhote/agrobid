@@ -4,10 +4,10 @@ import 'package:agrobid/utils/constant.dart';
 import 'package:agrobid/utils/data.dart';
 import 'package:agrobid/widgets/button.dart';
 import 'package:agrobid/widgets/user_icon.dart';
-import 'package:customize_flutter/customize_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:customize/customize.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  File _image;
+  File image;
   final picker = ImagePicker();
 
   Future getImage() async {
@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        image = File(pickedFile.path);
       } else {
         print('No image selected.');
       }
@@ -35,65 +35,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: colorTertiary,
       body: SafeArea(
-        child: Container(
-          width: Get.width,
-          child: Column(
-            children: [
-              buildProfileImage(),
-              buildMenu(),
-            ],
-          ),
+        child: Column(
+          children: [
+            buildProfileImage(),
+            buildMenu(),
+          ],
         ),
       ),
     );
   }
 
   Widget buildMenu() {
-    return Container(
-      child: Column(
-        children: [
-          buildInkMenuItem(icon: Icons.bookmark, menu: "My Products"),
-          buildInkMenuItem(icon: Icons.campaign, menu: "My Bids"),
-          buildInkMenuItem(icon: Icons.person, menu: "My Account"),
-          buildLogoutButton(),
-        ],
-      ),
+    return Column(
+      children: [
+        buildInkMenuItem(icon: Icons.bookmark, menu: "My Products"),
+        buildInkMenuItem(icon: Icons.campaign, menu: "My Bids"),
+        buildInkMenuItem(icon: Icons.person, menu: "My Account"),
+        buildLogoutButton(),
+      ],
     );
   }
 
   Widget buildLogoutButton() {
     return CustomButton(
       text: "Logout",
-      margin: mt48,
       backgroundColor: colorDanger,
-    ).marginSymmetric(horizontal: 30);
+    ).px32.pt(top: 80);
   }
 
   Widget buildInkMenuItem({String menu, IconData icon, Function onTap}) {
     return InkWell(
-      splashColor: colorPrimary,
+      splashColor: FxColors.blueGray900,
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: colorPrimaryLight,
-          borderRadius: borderCircular,
-        ),
-        width: Get.width,
-        height: 50,
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: colorText,
-            ).paddingOnly(left: 20, right: 12),
-            Text(
-              menu,
-              style: styleLabel.copyWith(color: colorPrimary, fontSize: 16),
-            ),
-          ],
-        ),
+      child: Row(
+        children: [
+          Icon(icon, color: FxColors.blueGray500)
+              .paddingOnly(left: 20, right: 12),
+          Text(menu).color(color: FxColors.blue800).base.bold,
+        ],
       ),
-    ).marginSymmetric(vertical: 5, horizontal: 30);
+    )
+        .container(
+          decoration: BoxDecoration(
+            borderRadius: FxRadius.radius30,
+            color: FxColors.blueGray200,
+          ),
+          height: 45,
+        )
+        .px32
+        .pt8;
   }
 
   Widget buildProfileImage() {
@@ -123,10 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
-        Text(
-          currentUser[0].fullname,
-          style: styleTitle,
-        ).pt16,
+        Text(currentUser[0].fullname).h6.pt16,
       ],
     ).py48;
   }

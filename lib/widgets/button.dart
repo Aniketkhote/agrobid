@@ -1,5 +1,5 @@
 import 'package:agrobid/utils/constant.dart';
-import 'package:customize_flutter/customize_flutter.dart';
+import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -21,8 +21,8 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? 0,
-      padding: py(10),
+      margin: margin ?? FxMargin.m0,
+      padding: FxPadding.py(vertical: 10),
       child: ElevatedButton(
         style: ButtonStyle(
           padding:

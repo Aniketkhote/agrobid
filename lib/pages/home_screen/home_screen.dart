@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(isActions: true),
+      appBar: buildAppBar(),
       body: Container(
         height: Get.height,
         color: colorDisabled,
