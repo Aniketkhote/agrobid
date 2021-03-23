@@ -1,3 +1,5 @@
+import 'package:customize/customize.dart';
+
 import '../../utils/data.dart';
 import '../../utils/constant.dart';
 import '../../widgets/widgets.dart';
@@ -15,45 +17,42 @@ class ProductDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorTertiary,
       body: SafeArea(
-        child: Container(
-          height: Get.height,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Stack(
-                    children: [
-                      Image.network(
-                        productList[int.parse(productId)].image,
-                        fit: BoxFit.cover,
-                        width: Get.width,
-                        height: Get.height / 4,
-                      ),
-                      BackButton()
-                    ],
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          buildCategoriesBox(),
-                          CustomDivider(
-                            colorText: colorDisabled,
-                            thickness: 1,
-                            height: 15,
-                            indent: 30,
-                          ),
-                          buildBidderList(productId: productList[0].id),
-                        ],
-                      ),
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Stack(
+                  children: [
+                    Image.network(
+                      productList[int.parse(productId)].image,
+                      fit: BoxFit.cover,
+                      width: Get.width,
+                      height: 200,
+                    ),
+                    BackButton()
+                  ],
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        buildCategoriesBox(),
+                        CustomDivider(
+                          colorText: colorDisabled,
+                          thickness: 1,
+                          height: 15,
+                          indent: 30,
+                        ),
+                        buildBidderList(productId: productList[0].id),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              buildBidPriceBox(),
-              buildMakeBidButton(),
-            ],
-          ),
+                ),
+              ],
+            ),
+            buildBidPriceBox(),
+            buildMakeBidButton(),
+          ],
         ),
       ),
     );
@@ -123,8 +122,7 @@ class ProductDetailScreen extends StatelessWidget {
       right: 30,
       child: ElevatedButton(
         style: ButtonStyle(
-          padding:
-              MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 10)),
+          padding: MaterialStateProperty.all(FxPadding.px12),
           shape: MaterialStateProperty.all(
               RoundedRectangleBorder(borderRadius: borderRounded)),
           backgroundColor: MaterialStateProperty.all(colorPrimary),

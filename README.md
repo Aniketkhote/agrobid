@@ -1,5 +1,4 @@
 # Agrobid
 
-Agrobid is online platform to bid farm product.
-
+Agrobid is an online platform to bid farming products.
 

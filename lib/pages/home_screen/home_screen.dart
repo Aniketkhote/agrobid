@@ -1,5 +1,6 @@
 import 'package:agrobid/utils/constant.dart';
 import 'package:agrobid/utils/data.dart';
+import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/widgets.dart';
@@ -13,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         height: Get.height,
         color: colorDisabled,
-        padding: EdgeInsets.symmetric(horizontal: 8),
+        padding: FxPadding.px8,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -23,14 +24,13 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => Container(
-                    margin: EdgeInsets.only(right: sm2),
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    margin: FxMargin.mr8,
+                    padding: FxPadding.pxy(vertical: 5, horizontal: 10),
                     decoration: BoxDecoration(
                         color: colorText, borderRadius: borderCircular),
-                    child: Text(
-                      subcategoryList[index].name,
-                      style: styleTitle.copyWith(color: colorTertiary),
-                    ),
+                    child: Text(subcategoryList[index].name)
+                        .color(color: FxColors.light)
+                        .blackBold,
                   ),
                   itemCount: subcategoryList.length,
                 ),

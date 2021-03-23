@@ -1,5 +1,5 @@
 name: agrobid
-description: Agrobid is farm prodcut biding app.
+description: Agrobid is an online platform to bid farming products.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.

@@ -59,8 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget buildLogoutButton() {
     return CustomButton(
       text: "Logout",
-      backgroundColor: colorDanger,
-    ).px32.pt(top: 80);
+      backgroundColor: FxColors.red500,
+    ).px32.pt(top: 60);
   }
 
   Widget buildInkMenuItem({String menu, IconData icon, Function onTap}) {
@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Icon(icon, color: FxColors.blueGray500)
               .paddingOnly(left: 20, right: 12),
-          Text(menu).color(color: FxColors.blue800).base.bold,
+          Text(menu).color(color: FxColors.blueGray800).base.bold,
         ],
       ),
     )

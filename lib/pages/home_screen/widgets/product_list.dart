@@ -1,5 +1,6 @@
 import 'package:agrobid/utils/constant.dart';
 import 'package:agrobid/utils/data.dart';
+import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../pages.dart';
@@ -15,9 +16,11 @@ Widget buildProductList() {
       onTap: () =>
           Get.to(() => ProductDetailScreen(productId: productList[index].id)),
       child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(5),
-          topRight: Radius.circular(5),
+        borderRadius: FxRadius.radius(
+          bottomLeft: 0,
+          bottomRight: 0,
+          topLeft: 10,
+          topRight: 10,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
