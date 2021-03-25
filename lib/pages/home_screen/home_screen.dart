@@ -1,5 +1,4 @@
 import 'package:agrobid/utils/constant.dart';
-import 'package:agrobid/utils/data.dart';
 import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,23 +17,23 @@ class HomeScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 30,
-                margin: EdgeInsets.only(top: 30, bottom: 20),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => Container(
-                    margin: FxMargin.mr8,
-                    padding: FxPadding.pxy(vertical: 5, horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: colorText, borderRadius: borderCircular),
-                    child: Text(subcategoryList[index].name)
-                        .color(color: FxColors.light)
-                        .blackBold,
-                  ),
-                  itemCount: subcategoryList.length,
-                ),
-              ),
+              // Container(
+              //   height: 30,
+              //   margin: EdgeInsets.only(top: 30, bottom: 20),
+              //   child: ListView.builder(
+              //     scrollDirection: Axis.horizontal,
+              //     itemBuilder: (context, index) => Container(
+              //       margin: FxMargin.mr8,
+              //       padding: FxPadding.pxy(vertical: 5, horizontal: 10),
+              //       decoration: BoxDecoration(
+              //           color: colorText, borderRadius: borderCircular),
+              //       child: Text(subcategoryList[index].name)
+              //           .color(color: FxColors.light)
+              //           .blackBold,
+              //     ),
+              //     itemCount: subcategoryList.length,
+              //   ),
+              // ),
               buildProductList(),
             ],
           ),

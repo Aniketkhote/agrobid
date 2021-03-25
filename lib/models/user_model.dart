@@ -1,12 +1,13 @@
 class UserModel {
-  final String id;
-  final String username;
-  final String fullname;
-  final String email;
-  final String phone;
-  final String city;
-  final String area;
-  final String image;
+  String id;
+  String username;
+  String fullname;
+  String email;
+  String phone;
+  String password;
+  String city;
+  String area;
+  String image;
 
   UserModel({
     this.id,
@@ -14,8 +15,9 @@ class UserModel {
     this.fullname,
     this.email,
     this.phone,
-    this.image,
+    this.password,
     this.city,
     this.area,
+    this.image,
   });
 }

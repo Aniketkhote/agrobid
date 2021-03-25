@@ -1,8 +1,9 @@
-import 'package:agrobid/pages/app_layout.dart';
 import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../pages.dart';
 
 class IntroScreen extends StatelessWidget {
   final List data = [
@@ -41,7 +42,7 @@ class IntroScreen extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () => Get.offAll(() => AppLayout()),
+            onPressed: () => Get.offAll(() => LoginScreen()),
             child: Text("Get Started"),
           ).container(width: FxWidth.vw100, height: 50).p32,
         ],

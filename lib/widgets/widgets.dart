@@ -5,3 +5,4 @@ export './vertical_bar.dart';
 export './divider.dart';
 export './button.dart';
 export './dropdown.dart';
+export './clickable_rich_text.dart';

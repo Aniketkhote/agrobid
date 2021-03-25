@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:agrobid/controllers/auth_controller.dart';
+import 'package:agrobid/controllers/user_controller.dart';
 import 'package:agrobid/utils/constant.dart';
 import 'package:agrobid/utils/data.dart';
 import 'package:agrobid/widgets/button.dart';
@@ -15,6 +17,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final AuthController _authController = Get.put(AuthController());
+  final UserController _userController = Get.put(UserController());
   File image;
   final picker = ImagePicker();
 
@@ -60,6 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return CustomButton(
       text: "Logout",
       backgroundColor: FxColors.red500,
+      onPressed: () => _authController.logout(),
     ).px32.pt(top: 60);
   }
 
@@ -113,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
-        Text(currentUser[0].fullname).h6.pt16,
+        Text(_userController.getUserInfo()).h6.pt16,
       ],
     ).py48;
   }

@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:agrobid/pages/app_layout.dart';
 import 'package:agrobid/pages/intro_screen/intro_screen.dart';
 import 'package:customize/customize.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +15,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 3000), () => Get.to(() => IntroScreen()));
+    Timer(
+      Duration(milliseconds: 3000),
+      () => checkUserLogedIn(),
+    );
+  }
+
+  void checkUserLogedIn() {
+    if (FirebaseAuth.instance.currentUser != null) {
+      Get.offAll(() => AppLayout());
+    } else {
+      Get.offAll(() => IntroScreen());
+    }
   }
 
   @override

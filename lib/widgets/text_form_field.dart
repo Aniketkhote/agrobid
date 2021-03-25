@@ -9,6 +9,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool isObscureText;
   final int maxLines;
+  final TextInputType keyboardType;
 
   const CustomTextFormField({
     Key key,
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.isObscureText,
     this.maxLines,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,8 @@ class CustomTextFormField extends StatelessWidget {
           Text(label).base.semiBold,
           SizedBox(height: 5),
           TextFormField(
+            controller: controller,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               border: InputBorder.none,
               filled: true,

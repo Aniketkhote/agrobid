@@ -1,7 +1,8 @@
 export './app_layout.dart';
 export './splash_screen/splash_screen.dart';
 export './home_screen/home_screen.dart';
-export './login_screen/login_screen.dart';
+export './auth_screen/login_screen.dart';
+export './auth_screen/register_screen.dart';
 export './my_product_screen/my_product_screen.dart';
 export './my_bid_screen/my_bid_screen.dart';
 export './new_product_screen/new_product_screen.dart';
