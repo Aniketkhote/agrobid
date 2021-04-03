@@ -3,6 +3,13 @@ class BidderModel {
   final String user;
   final String date;
   final String biddingPrice;
+  final String minQty;
 
-  BidderModel({this.id, this.user, this.date, this.biddingPrice});
+  BidderModel({
+    this.id,
+    this.user,
+    this.date,
+    this.biddingPrice,
+    this.minQty,
+  });
 }

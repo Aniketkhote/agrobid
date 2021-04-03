@@ -61,7 +61,7 @@ class ProductDetailScreen extends StatelessWidget {
   Widget buildCategoriesBox() {
     return Container(
       margin: EdgeInsets.only(top: 70, bottom: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: FxPadding.px32,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -157,7 +157,7 @@ class ProductDetailScreen extends StatelessWidget {
             ),
             buildFeatureBox(
               label: "Minimum Qty",
-              count: bidderList.length.toString() + "/" + unitList[0].code,
+              count: bidderList.length.toString() + unitList[0].code,
             ),
             buildFeatureBox(
               label: "Total Bid",

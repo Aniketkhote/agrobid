@@ -44,7 +44,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
             InkWell(
               onTap: getImage,
               child: Container(
-                width: FxWidth.vw100,
+                width: FxWidth.w100,
                 margin: FxMargin.mb16,
                 color: FxColors.blueGray200,
                 height: 150,

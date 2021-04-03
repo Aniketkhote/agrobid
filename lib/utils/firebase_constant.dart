@@ -3,4 +3,5 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
-final CollectionReference users = firestore.collection("users");
+final CollectionReference usersRef = firestore.collection("users");
+final CollectionReference productsRef = firestore.collection("products");

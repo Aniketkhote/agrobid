@@ -44,7 +44,7 @@ class IntroScreen extends StatelessWidget {
           ElevatedButton(
             onPressed: () => Get.offAll(() => LoginScreen()),
             child: Text("Get Started"),
-          ).container(width: FxWidth.vw100, height: 50).p32,
+          ).container(width: FxWidth.w100, height: 50).p32,
         ],
       ),
     );
@@ -56,13 +56,8 @@ class IntroScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(imageUrl).px48.container(height: 300),
-          Text(title).color(color: FxColors.light).xl3.bold.textAlignCenter,
-          Text(caption)
-              .color(color: FxColors.gray500)
-              .lg
-              .textAlignCenter
-              .px24
-              .pt8,
+          Text(title).color(FxColors.light).xl3.bold.textAlignCenter,
+          Text(caption).color(FxColors.gray500).lg.textAlignCenter.px24.pt8,
         ],
       ),
     );

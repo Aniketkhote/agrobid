@@ -1,6 +1,6 @@
 import 'package:agrobid/pages/app_layout.dart';
 import 'package:agrobid/pages/auth_screen/login_screen.dart';
-import 'package:agrobid/services/auth_service.dart';
+import 'package:agrobid/services/user_service.dart';
 import 'package:agrobid/utils/firebase_constant.dart';
 import 'package:customize/customize.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +26,7 @@ class AuthController extends GetxController {
         user.email = email;
         user.phone = phone;
         user.password = password;
-        AuthService.storeUserData(user);
+        UserService.storeUserData(user);
         Get.offAll(() => AppLayout());
       } else {
         print("error");

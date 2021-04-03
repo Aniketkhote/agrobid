@@ -15,11 +15,11 @@ Widget buildProductCardBody(int index) {
         Text(productList[index].title, maxLines: 2)
             .xl
             .bold
-            .color(color: FxColors.blueGray700)
+            .color(FxColors.blueGray700)
             .ellipsis,
         Text(productList[index].detail, maxLines: 2)
             .lg
-            .color(color: FxColors.blueGray500)
+            .color(FxColors.blueGray500)
             .ellipsis,
       ],
     ),

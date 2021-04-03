@@ -227,25 +227,59 @@ List<ProductModel> productList = [
 
 List<BidderModel> bidderList = [
   BidderModel(
-      id: "0", user: userList[1].id, biddingPrice: "150", date: "01h 34m"),
+      id: "0",
+      user: userList[1].id,
+      biddingPrice: "150",
+      minQty: "12",
+      date: "01h 34m"),
   BidderModel(
-      id: "1", user: userList[2].id, biddingPrice: "70", date: "02h 04m"),
+      id: "1",
+      user: userList[2].id,
+      biddingPrice: "70",
+      minQty: "10",
+      date: "02h 04m"),
   BidderModel(
-      id: "2", user: userList[3].id, biddingPrice: "90", date: "01h 44m"),
+      id: "2",
+      user: userList[3].id,
+      biddingPrice: "90",
+      minQty: "20",
+      date: "01h 44m"),
   BidderModel(
-      id: "3", user: userList[3].id, biddingPrice: "111", date: "01h 34m"),
+      id: "3",
+      user: userList[3].id,
+      biddingPrice: "111",
+      minQty: "50",
+      date: "01h 34m"),
   BidderModel(
-      id: "4", user: userList[2].id, biddingPrice: "120", date: "00h 3m"),
+      id: "4",
+      user: userList[2].id,
+      biddingPrice: "120",
+      minQty: "12",
+      date: "00h 3m"),
   BidderModel(
-      id: "5", user: userList[3].id, biddingPrice: "97", date: "02h 01m"),
+      id: "5",
+      user: userList[3].id,
+      biddingPrice: "97",
+      minQty: "17",
+      date: "02h 01m"),
   BidderModel(
-      id: "6", user: userList[0].id, biddingPrice: "80", date: "03h 32m"),
+      id: "7",
+      user: userList[1].id,
+      biddingPrice: "88",
+      minQty: "21",
+      date: "03h 27m"),
   BidderModel(
-      id: "7", user: userList[1].id, biddingPrice: "88", date: "03h 27m"),
+      id: "8",
+      user: userList[2].id,
+      biddingPrice: "90",
+      minQty: "40",
+      date: "05h 09m"),
   BidderModel(
-      id: "8", user: userList[2].id, biddingPrice: "90", date: "05h 09m"),
-  BidderModel(
-      id: "9", user: userList[2].id, biddingPrice: "90", date: "05h 09m"),
+      id: "9",
+      user: userList[2].id,
+      biddingPrice: "90",
+      minQty: "2",
+      date: "05h 09m"),
 ];
 
 final menuItems = [
