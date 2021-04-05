@@ -11,7 +11,7 @@ Widget buildProductImage(int index) {
         right: 0,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          color: colorTertiary,
+          color: colorDangerLight,
           child: Row(
             children: [
               Text(

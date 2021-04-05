@@ -1,11 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UnitModel {
-  final String id;
-  final String name;
-  final String code;
+  String id;
+  String name;
+  String code;
 
   UnitModel({
     this.id,
     this.name,
     this.code,
   });
+
+  factory UnitModel.fromDocumentSnapshot(QueryDocumentSnapshot doc) =>
+      UnitModel(
+        id: doc["id"],
+        name: doc["name"],
+        code: doc["code"],
+      );
 }

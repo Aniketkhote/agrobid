@@ -31,6 +31,7 @@ dependencies:
   firebase_core: ^1.0.2
   flutter_svg: ^0.19.3
   font_awesome: ^5.10.1
+  form_field_validator: ^1.1.0
   get: ^3.25.6
   image_picker: ^0.7.2+1
   url_launcher: ^6.0.3

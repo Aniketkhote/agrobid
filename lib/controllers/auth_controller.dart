@@ -2,7 +2,6 @@ import 'package:agrobid/pages/app_layout.dart';
 import 'package:agrobid/pages/auth_screen/login_screen.dart';
 import 'package:agrobid/services/user_service.dart';
 import 'package:agrobid/utils/firebase_constant.dart';
-import 'package:customize/customize.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,55 +15,57 @@ class AuthController extends GetxController {
 
   Future<void> signUpWithEmail(
       {String name, String email, String phone, String password}) async {
-    if (!email.isEmptyOrNull && !password.isEmptyOrNull) {
-      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+    UserCredential userCredential;
+    try {
+      userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
-
-      if (userCredential != null) {
-        UserModel user = UserModel();
-        user.fullname = name;
-        user.email = email;
-        user.phone = phone;
-        user.password = password;
-        UserService.storeUserData(user);
-        Get.offAll(() => AppLayout());
-      } else {
-        print("error");
-        Get.snackbar(
-          "Error",
-          "Something went wrong",
-          backgroundColor: FxColors.dark,
-          colorText: FxColors.light,
-        );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
       }
+    } catch (e) {
+      print(e);
+    }
+    if (userCredential != null) {
+      UserModel user = UserModel()
+        ..fullname = name
+        ..email = email
+        ..phone = phone
+        ..password = password
+        ..image = ""
+        ..city = ""
+        ..area = "";
+      UserService.storeUserData(user);
+      Get.offAll(() => AppLayout());
     } else {
-      Get.snackbar("Warning", "Filled all required fields");
+      Get.snackbar("Error", "Something went wrong");
     }
 
+    nameController.text = "";
     emailController.text = "";
+    phoneController.text = "";
     passwordController.text = "";
   }
 
   Future<void> signInWithEmail({String email, String password}) async {
-    if (!email.isEmptyOrNull && !password.isEmptyOrNull) {
-      UserCredential user = await auth.signInWithEmailAndPassword(
+    UserCredential user;
+    try {
+      user = await auth.signInWithEmailAndPassword(
           email: email, password: password);
-
-      if (user != null) {
-        Get.offAll(() => AppLayout());
-      } else {
-        print("error");
-        Get.snackbar(
-          "Error",
-          "Something went wrong",
-          backgroundColor: FxColors.dark,
-          colorText: FxColors.light,
-        );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
       }
-    } else {
-      Get.snackbar("Warning", "Filled all required fields");
     }
-
+    if (user != null) {
+      Get.offAll(() => AppLayout());
+    } else {
+      Get.snackbar("Error", "Something went wrong");
+    }
     emailController.text = "";
     passwordController.text = "";
   }

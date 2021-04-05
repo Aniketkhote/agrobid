@@ -1,19 +1,16 @@
-import 'package:agrobid/models/user_model.dart';
+import 'package:agrobid/utils/firebase_constant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../models/user_model.dart';
 
 class UserController extends GetxController {
-  Rx<UserModel> _userModel = UserModel().obs;
+  RxString _name = "".obs;
 
-  UserModel get user => _userModel.value;
-
-  set user(UserModel user) => this._userModel.value = user;
-
-  void get clear => _userModel.value = UserModel();
+  String get name => _name.value;
 
   @override
   void onInit() {
+    _getname();
     super.onInit();
   }
 
@@ -23,5 +20,11 @@ class UserController extends GetxController {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  _getname() async {
+    QuerySnapshot snapshot =
+        await usersRef.where("id" == auth.currentUser.uid).get();
+    print(snapshot);
   }
 }

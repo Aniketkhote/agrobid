@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             home: SplashScreen(),
-            theme: ThemeData(scaffoldBackgroundColor: colorDisabled),
+            theme: ThemeData(scaffoldBackgroundColor: colorTertiary),
           );
         }
 

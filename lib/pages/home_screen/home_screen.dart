@@ -1,4 +1,3 @@
-import 'package:agrobid/utils/constant.dart';
 import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,6 @@ class HomeScreen extends StatelessWidget {
       appBar: buildAppBar(),
       body: Container(
         height: Get.height,
-        color: colorDisabled,
         padding: FxPadding.px8,
         child: SingleChildScrollView(
           child: Column(

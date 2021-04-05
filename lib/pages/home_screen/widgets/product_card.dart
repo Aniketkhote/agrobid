@@ -8,7 +8,7 @@ Widget buildProductCardBody(int index) {
   return Container(
     padding: EdgeInsets.all(sm3),
     width: Get.width,
-    color: FxColors.trueGray100,
+    color: Colors.white,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

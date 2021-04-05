@@ -105,7 +105,9 @@ class BidderInfoSheet extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text(bidderList[userId.toInt - 1].biddingPrice).xl.bold,
+                  Text(bidderList[userId.toInt - 1].biddingPrice + "/kg")
+                      .xl
+                      .bold,
                   Text("Bidding Price").base.wideLetter,
                 ],
               ),

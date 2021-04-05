@@ -53,6 +53,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         buildInkMenuItem(icon: Icons.bookmark, menu: "My Products"),
         buildInkMenuItem(icon: Icons.campaign, menu: "My Bids"),
         buildInkMenuItem(icon: Icons.person, menu: "My Account"),
+        buildInkMenuItem(
+          icon: Icons.help,
+          menu: "About",
+          onTap: () => showAboutDialog(
+            context: context,
+            applicationName: "Agrobid",
+            applicationVersion: "v0.0.1",
+            children: [
+              Text("Agrobid is an online platform to bid farming products.")
+                  .wideLetter
+                  .base,
+              Text("support@agrobid.com").color(FxColors.blueGray400),
+            ],
+          ),
+        ),
         buildLogoutButton(),
       ],
     );

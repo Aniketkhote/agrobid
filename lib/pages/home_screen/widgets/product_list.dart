@@ -27,7 +27,7 @@ Widget buildProductList() {
           children: [
             buildProductImage(index),
             buildProductCardBody(index),
-            Divider(color: colorDisabled),
+            Divider(color: colorTertiary),
           ],
         ),
       ),
