@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:agrobid/controllers/auth_controller.dart';
+import 'package:agrobid/controllers/user_controller.dart';
 import 'package:agrobid/utils/constant.dart';
 import 'package:agrobid/utils/data.dart';
 import 'package:agrobid/widgets/button.dart';
@@ -17,6 +18,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final AuthController _authController = Get.put(AuthController());
+  final UserController _userController = Get.put(UserController());
   File image;
   final picker = ImagePicker();
 
@@ -131,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
-        Text("Aniket Khote").h6.pt16,
+        Obx(() => Text(_userController.name).h6.pt16),
       ],
     ).py48;
   }

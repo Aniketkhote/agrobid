@@ -76,7 +76,7 @@ class _NewProductScreenState extends State<NewProductScreen> {
               hintText: "120",
             ),
             CustomTextFormField(
-              label: "Minimum Selling Quantity(optional)",
+              label: "Minimum Selling Quantity",
               hintText: "120",
             ),
             CustomDropDown(

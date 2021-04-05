@@ -1,3 +1,4 @@
+import 'package:agrobid/controllers/product_controller.dart';
 import 'package:customize/customize.dart';
 
 import '../../utils/data.dart';
@@ -9,9 +10,10 @@ import 'package:get/get.dart';
 import 'widgets/bidder_list.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final String productId;
+  final int index;
+  final ProductController _controller = Get.put(ProductController());
 
-  const ProductDetailScreen({Key key, this.productId}) : super(key: key);
+  ProductDetailScreen(this.index);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +26,7 @@ class ProductDetailScreen extends StatelessWidget {
                 Stack(
                   children: [
                     Image.network(
-                      productList[int.parse(productId)].image,
+                      productList[0].image,
                       fit: BoxFit.cover,
                       width: Get.width,
                       height: 200,
@@ -66,11 +68,11 @@ class ProductDetailScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            productList[int.parse(productId)].title,
+            _controller.productList[index].title.capitalizeFirst,
             style: styleTitle.copyWith(fontSize: 18, color: colorPrimary),
           ),
           Text(
-            productList[int.parse(productId)].detail,
+            _controller.productList[index].detail.capitalizeFirst,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: colorLabel),
@@ -81,15 +83,15 @@ class ProductDetailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 buildCategoryBox(
-                    name: productList[int.parse(productId)].category,
+                    name: _controller.productList[index].category,
                     label: "Category"),
                 VerticalBar(),
                 buildCategoryBox(
-                    name: productList[int.parse(productId)].subcategory,
+                    name: _controller.productList[index].subcategory,
                     label: "Subcategory"),
                 VerticalBar(),
                 buildCategoryBox(
-                    name: productList[int.parse(productId)].variety,
+                    name: _controller.productList[index].variety,
                     label: "Variety"),
               ],
             ),
@@ -103,7 +105,7 @@ class ProductDetailScreen extends StatelessWidget {
     return Column(
       children: [
         Text(
-          name,
+          name.capitalize,
           style: styleTitle.copyWith(color: colorPrimary),
         ),
         SizedBox(height: sm1),
@@ -150,14 +152,14 @@ class ProductDetailScreen extends StatelessWidget {
           children: [
             buildFeatureBox(
               label: "Starting Price",
-              count:
-                  productList[int.parse(productId)].startingPrice.toString() +
-                      "/" +
-                      unitList[0].code,
+              count: _controller.productList[index].startingPrice.toString() +
+                  "/" +
+                  _controller.productList[index].unit,
             ),
             buildFeatureBox(
               label: "Minimum Qty",
-              count: bidderList.length.toString() + unitList[0].code,
+              count: _controller.productList[index].minQty.toString() +
+                  _controller.productList[index].unit,
             ),
             buildFeatureBox(
               label: "Total Bid",

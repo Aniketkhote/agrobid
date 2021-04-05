@@ -23,8 +23,7 @@ class UserController extends GetxController {
   }
 
   _getname() async {
-    QuerySnapshot snapshot =
-        await usersRef.where("id" == auth.currentUser.uid).get();
-    print(snapshot);
+    DocumentSnapshot snapshot = await usersRef.doc(auth.currentUser.uid).get();
+    _name.value = snapshot.data()["fullname"];
   }
 }
