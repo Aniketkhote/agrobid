@@ -1,3 +1,4 @@
+import 'package:agrobid/controllers/product_controller.dart';
 import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'widgets/product_list.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ProductController _controller = Get.put(ProductController());
     return Scaffold(
       appBar: buildAppBar(),
       body: Container(
@@ -32,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               //     itemCount: subcategoryList.length,
               //   ),
               // ),
-              buildProductList(),
+              buildProductList(productList: _controller.productList),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:agrobid/utils/constant.dart';
+import 'package:customize/customize.dart';
 import 'package:flutter/material.dart';
 
 AppBar buildAppBar({
@@ -15,6 +16,7 @@ AppBar buildAppBar({
     ),
     centerTitle: true,
     automaticallyImplyLeading: automaticallyImplyLeading ?? false,
+    iconTheme: IconThemeData(color: FxColors.blueGray600),
     actions: actions ?? List.empty(),
     backgroundColor: Colors.white,
     elevation: 0,

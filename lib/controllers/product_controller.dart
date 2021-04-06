@@ -10,12 +10,17 @@ class ProductController extends GetxController {
   var varietySelectedValue = RxString();
 
   RxList<ProductModel> _productsList = RxList<ProductModel>();
+  RxList<String> unitList = RxList<String>();
+  RxList<String> categoryList = RxList<String>();
+  RxList<String> subcategoryList = RxList<String>();
+  RxList<String> varietyList = RxList<String>();
 
   List<ProductModel> get productList => _productsList;
 
   @override
   void onInit() {
-    _getProducts();
+    _getMetaData();
+
     super.onInit();
   }
   // List get categories => categoryList.map((e) => categories.add(e.name));
@@ -30,5 +35,49 @@ class ProductController extends GetxController {
         ProductModel.fromDocumentSnapshot(element),
       );
     });
+  }
+
+  _getunit() async {
+    QuerySnapshot snapshot = await unitsRef.get();
+    snapshot.docs.forEach((element) {
+      unitList.add(
+        element.data()["name"],
+      );
+    });
+  }
+
+  _getcategory() async {
+    QuerySnapshot snapshot = await categoriesRef.get();
+    snapshot.docs.forEach((element) {
+      categoryList.add(
+        element.data()["name"],
+      );
+    });
+  }
+
+  _getsubcategory() async {
+    QuerySnapshot snapshot = await subcategoriesRef.get();
+    snapshot.docs.forEach((element) {
+      subcategoryList.add(
+        element.data()["name"],
+      );
+    });
+  }
+
+  _getvariety() async {
+    QuerySnapshot snapshot = await varitiesRef.get();
+    snapshot.docs.forEach((element) {
+      varietyList.add(
+        element.data()["name"],
+      );
+    });
+  }
+
+  _getMetaData() {
+    _getProducts();
+    _getunit();
+    _getcategory();
+    _getsubcategory();
+    _getvariety();
   }
 }

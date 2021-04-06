@@ -6,8 +6,15 @@ class CustomDropDown extends StatelessWidget {
   final List list;
   final String label;
   final RxString selectedValue;
-  const CustomDropDown({Key key, this.list, this.label, this.selectedValue})
-      : super(key: key);
+  final Function validator;
+
+  const CustomDropDown({
+    Key key,
+    this.list,
+    this.label,
+    this.selectedValue,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +24,7 @@ class CustomDropDown extends StatelessWidget {
       color: FxColors.blueGray200,
       child: Obx(
         () => DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
+          child: DropdownButtonFormField<String>(
             hint: Text(label).sm,
             isExpanded: true,
             items: list
@@ -30,6 +37,7 @@ class CustomDropDown extends StatelessWidget {
                 .toList(),
             onChanged: (value) => selectedValue.value = value,
             value: selectedValue.value,
+            validator: validator,
           ),
         ),
       ),

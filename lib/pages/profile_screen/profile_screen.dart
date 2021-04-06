@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:agrobid/controllers/auth_controller.dart';
 import 'package:agrobid/controllers/user_controller.dart';
+import 'package:agrobid/pages/account_screen/account_screen.dart';
 import 'package:agrobid/utils/constant.dart';
 import 'package:agrobid/utils/data.dart';
 import 'package:agrobid/widgets/button.dart';
@@ -54,7 +55,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         buildInkMenuItem(icon: Icons.bookmark, menu: "My Products"),
         buildInkMenuItem(icon: Icons.campaign, menu: "My Bids"),
-        buildInkMenuItem(icon: Icons.person, menu: "My Account"),
+        buildInkMenuItem(
+          icon: Icons.person,
+          menu: "My Account",
+          onTap: () => Get.to(() => AccountScreen()),
+        ),
         buildInkMenuItem(
           icon: Icons.help,
           menu: "About",

@@ -11,8 +11,7 @@ class UnitModel {
     this.code,
   });
 
-  factory UnitModel.fromDocumentSnapshot(QueryDocumentSnapshot doc) =>
-      UnitModel(
+  factory UnitModel.fromDocumentSnapshot(DocumentSnapshot doc) => UnitModel(
         id: doc["id"],
         name: doc["name"],
         code: doc["code"],
