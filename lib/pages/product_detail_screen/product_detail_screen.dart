@@ -1,4 +1,5 @@
 import 'package:agrobid/controllers/product_controller.dart';
+import 'package:agrobid/utils/firebase_constant.dart';
 import 'package:customize/customize.dart';
 
 import '../../utils/data.dart';
@@ -26,7 +27,7 @@ class ProductDetailScreen extends StatelessWidget {
                 Stack(
                   children: [
                     Image.network(
-                      productList[0].image,
+                      _controller.productList[index].image,
                       fit: BoxFit.cover,
                       width: Get.width,
                       height: 200,
@@ -45,7 +46,8 @@ class ProductDetailScreen extends StatelessWidget {
                           height: 15,
                           indent: 30,
                         ),
-                        buildBidderList(productId: productList[0].id),
+                        buildBidderList(
+                            productId: _controller.productList[index].id),
                       ],
                     ),
                   ),
@@ -53,7 +55,9 @@ class ProductDetailScreen extends StatelessWidget {
               ],
             ),
             buildBidPriceBox(),
-            buildMakeBidButton(),
+            auth.currentUser.uid != _controller.productList[index].user
+                ? buildMakeBidButton()
+                : SizedBox.shrink(),
           ],
         ),
       ),
@@ -154,12 +158,12 @@ class ProductDetailScreen extends StatelessWidget {
               label: "Starting Price",
               count: _controller.productList[index].startingPrice.toString() +
                   "/" +
-                  _controller.productList[index].unit,
+                  _controller.units[_controller.productList[index].unit].code,
             ),
             buildFeatureBox(
               label: "Minimum Qty",
               count: _controller.productList[index].minQty.toString() +
-                  _controller.productList[index].unit,
+                  _controller.units[_controller.productList[index].unit].code,
             ),
             buildFeatureBox(
               label: "Total Bid",
@@ -203,11 +207,20 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomDivider(),
-            CustomTextFormField(label: "Enter Quantity", hintText: "100"),
-            CustomTextFormField(label: "Enter Bidding Price", hintText: "120"),
-            CustomButton(
-              onPressed: () => Get.back(),
+            CustomTextFormField(
+              label: "Enter Quantity",
+              hintText: "100",
+              controller: _controller.bidQtyController,
             ),
+            CustomTextFormField(
+              label: "Enter Bidding Price",
+              hintText: "120",
+              controller: _controller.bidPriceController,
+            ),
+            CustomButton(onPressed: () {
+              _controller.placeBid(pid: _controller.productList[index].id);
+              Get.back();
+            }),
             SizedBox(height: 50),
           ],
         ),

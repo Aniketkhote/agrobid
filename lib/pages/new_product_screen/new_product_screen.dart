@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:agrobid/controllers/product_controller.dart';
-import 'package:agrobid/pages/app_layout.dart';
 import 'package:agrobid/utils/constant.dart';
+import 'package:agrobid/utils/firebase_constant.dart';
 import 'package:agrobid/widgets/widgets.dart';
 import 'package:customize/customize.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,12 @@ class _NewProductScreenState extends State<NewProductScreen> {
         print('No image selected.');
       }
     });
+  }
+
+  Future getUploadImage() async {
+    Reference reference = storage.ref().child(_image.path);
+    UploadTask uploadTask = reference.putFile(_image);
+    TaskSnapshot taskSnapshot = await uploadTask;
   }
 
   @override
@@ -70,30 +77,33 @@ class _NewProductScreenState extends State<NewProductScreen> {
                 label: "Title",
                 hintText: "Get fresh apple",
                 validator: RequiredValidator(errorText: "title required"),
+                controller: _controller.titleController,
               ),
               CustomTextFormField(
                 label: "Details",
                 hintText: "Write detail information about product",
                 maxLines: 5,
                 validator: RequiredValidator(errorText: "details required"),
+                controller: _controller.detailController,
               ),
               CustomTextFormField(
                 label: "Minimum Bidding Price",
                 hintText: "120",
                 validator: RequiredValidator(
                     errorText: "minimum bidding price required"),
+                controller: _controller.biddingPriceController,
               ),
               CustomTextFormField(
                 label: "Minimum Selling Quantity",
                 hintText: "120",
                 validator: RequiredValidator(
                     errorText: "minimum selling quantity required"),
+                controller: _controller.qtyController,
               ),
               CustomDropDown(
                 label: "Select Product Unit",
                 list: _controller.unitList.toList(),
                 selectedValue: _controller.unitSelectedValue,
-                validator: RequiredValidator(errorText: "select product unit"),
               ),
               CustomDropDown(
                 label: "Select Product Category",
@@ -114,7 +124,8 @@ class _NewProductScreenState extends State<NewProductScreen> {
                 text: "Submit",
                 onPressed: () {
                   if (formKey.currentState.validate()) {
-                    Get.to(() => AppLayout());
+                    _controller.storeProduct();
+                    Get.back();
                   }
                 },
               ),
