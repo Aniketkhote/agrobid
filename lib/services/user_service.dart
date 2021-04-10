@@ -10,6 +10,9 @@ class UserService {
       "fullname": user.fullname,
       "email": user.email,
       "phone": user.phone,
+      "city": user.city,
+      "area": user.area,
+      "image": user.image,
     });
   }
 

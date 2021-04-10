@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:agrobid/controllers/product_controller.dart';
 import 'package:agrobid/utils/constant.dart';
-import 'package:agrobid/utils/firebase_constant.dart';
 import 'package:agrobid/widgets/widgets.dart';
 import 'package:customize/customize.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
@@ -32,12 +30,6 @@ class _NewProductScreenState extends State<NewProductScreen> {
         print('No image selected.');
       }
     });
-  }
-
-  Future getUploadImage() async {
-    Reference reference = storage.ref().child(_image.path);
-    UploadTask uploadTask = reference.putFile(_image);
-    TaskSnapshot taskSnapshot = await uploadTask;
   }
 
   @override
@@ -102,22 +94,22 @@ class _NewProductScreenState extends State<NewProductScreen> {
               ),
               CustomDropDown(
                 label: "Select Product Unit",
-                list: _controller.unitList.toList(),
+                list: _controller.unitList,
                 selectedValue: _controller.unitSelectedValue,
               ),
               CustomDropDown(
                 label: "Select Product Category",
-                list: _controller.categoryList.toList(),
+                list: _controller.categoryList,
                 selectedValue: _controller.categorySelectedValue,
               ),
               CustomDropDown(
                 label: "Select Product Sub Category",
-                list: _controller.subcategoryList.toList(),
+                list: _controller.subcategoryList,
                 selectedValue: _controller.subcategorySelectedValue,
               ),
               CustomDropDown(
                 label: "Select Product Variety",
-                list: _controller.varietyList.toList(),
+                list: _controller.varietyList,
                 selectedValue: _controller.varietySelectedValue,
               ),
               CustomButton(
@@ -125,7 +117,8 @@ class _NewProductScreenState extends State<NewProductScreen> {
                 onPressed: () {
                   if (formKey.currentState.validate()) {
                     _controller.storeProduct();
-                    Get.back();
+                    formKey.currentState.reset();
+                    _image = null;
                   }
                 },
               ),

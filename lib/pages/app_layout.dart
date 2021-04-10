@@ -17,7 +17,7 @@ class AppLayout extends StatelessWidget {
         onPageChanged: (value) => controller.pageCurrentIndex.value = value,
         children: [
           HomeScreen(),
-          Container(),
+          // Container(),
           NewProductScreen(),
           // NotificationScreen(),
           ProfileScreen(),

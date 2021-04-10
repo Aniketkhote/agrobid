@@ -1,11 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class SubcategoryModel {
-  final String id;
-  final String name;
-  final String category;
+  String id;
+  String name;
+  String category;
 
   SubcategoryModel({
     this.id,
     this.name,
     this.category,
   });
+
+  factory SubcategoryModel.fromDocumentSnapshot(DocumentSnapshot doc) =>
+      SubcategoryModel(
+        id: doc.id,
+        name: doc["name"],
+        category: doc["category"],
+      );
 }

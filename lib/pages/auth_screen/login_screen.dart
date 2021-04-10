@@ -38,15 +38,16 @@ class LoginScreen extends StatelessWidget {
                   isObscureText: true,
                 ),
                 CustomButton(
-                    text: "Login".toUpperCase(),
-                    onPressed: () {
-                      if (formKey.currentState.validate()) {
-                        _controller.signInWithEmail(
-                          email: _controller.emailController.text,
-                          password: _controller.passwordController.text,
-                        );
-                      }
-                    }),
+                  text: "Login".toUpperCase(),
+                  onPressed: () {
+                    if (formKey.currentState.validate()) {
+                      _controller.signInWithEmail(
+                        email: _controller.emailController.text,
+                        password: _controller.passwordController.text,
+                      );
+                    }
+                  },
+                ),
                 CustomClickableRichText(
                   text: "Not yet account? ",
                   clickableText: "Register",

@@ -1,3 +1,4 @@
+import 'package:agrobid/controllers/product_controller.dart';
 import 'package:agrobid/models/product_model.dart';
 import 'package:agrobid/utils/constant.dart';
 import 'package:customize/customize.dart';
@@ -8,14 +9,17 @@ import 'product_card.dart';
 import 'product_image.dart';
 
 Widget buildProductList({List<ProductModel> productList}) {
+  final ProductController _product = Get.put(ProductController());
   return ListView.builder(
     padding: FxPadding.pt32,
-    reverse: true,
     physics: NeverScrollableScrollPhysics(),
     shrinkWrap: true,
     itemCount: productList.length,
     itemBuilder: (context, index) => GestureDetector(
-      onTap: () => Get.to(() => ProductDetailScreen(index)),
+      onTap: () {
+        _product.getBiders(pid: productList[index].id);
+        Get.to(() => ProductDetailScreen(index, product: productList[index]));
+      },
       child: ClipRRect(
         borderRadius: FxRadius.radius(
           bottomLeft: 0,

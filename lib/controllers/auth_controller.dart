@@ -21,9 +21,9 @@ class AuthController extends GetxController {
           email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        Get.snackbar('warning', 'The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        Get.snackbar('warning', 'The account already exists for that email.');
       }
     } catch (e) {
       print(e);
@@ -33,10 +33,10 @@ class AuthController extends GetxController {
         ..fullname = name
         ..email = email
         ..phone = phone
-        ..password = password
-        ..image = ""
-        ..city = ""
-        ..area = "";
+        ..image = null
+        ..city = null
+        ..area = null
+        ..image = null;
       UserService.storeUserData(user);
       Get.offAll(() => AppLayout());
     } else {
@@ -50,24 +50,26 @@ class AuthController extends GetxController {
   }
 
   Future<void> signInWithEmail({String email, String password}) async {
-    UserCredential user;
     try {
-      user = await auth.signInWithEmailAndPassword(
+      UserCredential user = await auth.signInWithEmailAndPassword(
           email: email, password: password);
+
+      if (user != null) {
+        Get.offAll(() => AppLayout());
+      } else {
+        Get.snackbar("Error", "Something went wrong");
+      }
+      emailController.text = "";
+      passwordController.text = "";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        Get.snackbar('warning', 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        Get.snackbar('warning', 'Wrong password provided for that user.');
       }
+    } catch (e) {
+      print(e);
     }
-    if (user != null) {
-      Get.offAll(() => AppLayout());
-    } else {
-      Get.snackbar("Error", "Something went wrong");
-    }
-    emailController.text = "";
-    passwordController.text = "";
   }
 
   void logout() {

@@ -1,11 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class CategoryModel {
-  final String id;
-  final String name;
-  final String image;
+  String id;
+  String name;
 
   CategoryModel({
     this.id,
     this.name,
-    this.image,
   });
+
+  factory CategoryModel.fromDocumentSnapshot(DocumentSnapshot doc) =>
+      CategoryModel(
+        id: doc.id,
+        name: doc["name"],
+      );
 }

@@ -10,7 +10,7 @@ class ProductModel {
   int startingPrice;
   int currentPrice;
   int minQty;
-  int unit;
+  String unit;
   String category;
   String subcategory;
   String variety;
@@ -33,10 +33,11 @@ class ProductModel {
 
   factory ProductModel.fromDocumentSnapshot(DocumentSnapshot doc) =>
       ProductModel(
-        id: doc["id"],
+        id: doc.id,
         title: doc["title"],
         detail: doc["detail"],
         image: doc["image"],
+        date: doc["date"],
         user: doc["user"],
         startingPrice: doc["startingPrice"],
         currentPrice: doc["currentPrice"],

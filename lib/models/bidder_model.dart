@@ -5,12 +5,12 @@ class BidderModel {
   final String productId;
   final String user;
   final String date;
-  final String biddingPrice;
-  final String minQty;
+  final int biddingPrice;
+  final int minQty;
 
   BidderModel({
-    this.productId,
     this.id,
+    this.productId,
     this.user,
     this.date,
     this.biddingPrice,
@@ -18,11 +18,11 @@ class BidderModel {
   });
 
   factory BidderModel.fromDocumentSnapshot(DocumentSnapshot doc) => BidderModel(
-        id: doc["id"],
+        id: doc.id,
         productId: doc["productId"],
         user: doc["user"],
         biddingPrice: doc["biddingPrice"],
-        minQty: doc["minQty"],
+        minQty: doc["qty"],
         date: doc["date"],
       );
 }

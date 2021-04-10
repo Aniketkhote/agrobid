@@ -14,8 +14,10 @@ class UserIcon extends StatelessWidget {
           border: Border.all(color: colorPrimary),
           borderRadius: BorderRadius.circular(100)),
       child: CircleAvatar(
-        backgroundImage: NetworkImage(userImage ??
-            "https://cdn1.iconfinder.com/data/icons/essential-21/128/User-512.png"),
+        backgroundImage: NetworkImage(
+          userImage ??
+              "https://icon2.cleanpng.com/20180626/ehy/kisspng-avatar-user-computer-icons-software-developer-5b327cc951ae22.8377289615300354013346.jpg",
+        ),
         backgroundColor: colorPrimaryLight,
         radius: radius ?? 12,
       ),

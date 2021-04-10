@@ -1,3 +1,4 @@
+import 'package:agrobid/models/user_model.dart';
 import 'package:agrobid/utils/firebase_constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,10 @@ class UserController extends GetxController {
   TextEditingController changeEmailController = TextEditingController();
   TextEditingController changePhoneController = TextEditingController();
 
+  RxList<UserModel> _usersList = RxList<UserModel>();
+
+  List<UserModel> get usersList => _usersList;
+
   RxString _name = "".obs;
 
   String get name => _name.value;
@@ -16,6 +21,7 @@ class UserController extends GetxController {
   @override
   void onInit() {
     _getname();
+    _getUsers();
     super.onInit();
   }
 
@@ -25,6 +31,15 @@ class UserController extends GetxController {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  _getUsers() async {
+    QuerySnapshot snapshot = await usersRef.get();
+    snapshot.docs.forEach((element) {
+      _usersList.add(
+        UserModel.fromDocumentSnapshot(element),
+      );
+    });
   }
 
   _getname() async {

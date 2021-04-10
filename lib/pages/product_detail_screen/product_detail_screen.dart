@@ -1,8 +1,9 @@
 import 'package:agrobid/controllers/product_controller.dart';
+import 'package:agrobid/controllers/user_controller.dart';
+import 'package:agrobid/utils/data.dart';
 import 'package:agrobid/utils/firebase_constant.dart';
 import 'package:customize/customize.dart';
 
-import '../../utils/data.dart';
 import '../../utils/constant.dart';
 import '../../widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,10 @@ import 'widgets/bidder_list.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final int index;
+  final product;
   final ProductController _controller = Get.put(ProductController());
 
-  ProductDetailScreen(this.index);
+  ProductDetailScreen(this.index, {this.product});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,7 @@ class ProductDetailScreen extends StatelessWidget {
                 Stack(
                   children: [
                     Image.network(
-                      _controller.productList[index].image,
+                      product.image,
                       fit: BoxFit.cover,
                       width: Get.width,
                       height: 200,
@@ -46,8 +48,9 @@ class ProductDetailScreen extends StatelessWidget {
                           height: 15,
                           indent: 30,
                         ),
-                        buildBidderList(
-                            productId: _controller.productList[index].id),
+                        _controller.biddersList.length != 0
+                            ? buildBidderList(productId: product.id)
+                            : SizedBox.shrink(),
                       ],
                     ),
                   ),
@@ -55,7 +58,7 @@ class ProductDetailScreen extends StatelessWidget {
               ],
             ),
             buildBidPriceBox(),
-            auth.currentUser.uid != _controller.productList[index].user
+            auth.currentUser.uid != product.user
                 ? buildMakeBidButton()
                 : SizedBox.shrink(),
           ],
@@ -72,11 +75,11 @@ class ProductDetailScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _controller.productList[index].title.capitalizeFirst,
+            product.title,
             style: styleTitle.copyWith(fontSize: 18, color: colorPrimary),
           ),
           Text(
-            _controller.productList[index].detail.capitalizeFirst,
+            product.detail,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: colorLabel),
@@ -87,17 +90,80 @@ class ProductDetailScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 buildCategoryBox(
-                    name: _controller.productList[index].category,
+                    name: _controller
+                        .categories[int.parse(product.category)].name,
                     label: "Category"),
                 VerticalBar(),
                 buildCategoryBox(
-                    name: _controller.productList[index].subcategory,
+                    name: _controller
+                        .subcategories[int.parse(product.subcategory)].name,
                     label: "Subcategory"),
                 VerticalBar(),
                 buildCategoryBox(
-                    name: _controller.productList[index].variety,
+                    name: _controller.varities[int.parse(product.variety)].name,
                     label: "Variety"),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildBidderList({String productId}) {
+    final UserController _userController = Get.put(UserController());
+    return Container(
+      padding: EdgeInsets.only(bottom: 60),
+      margin: EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Bidders {$productId}",
+            style: styleTitle.copyWith(fontSize: 18),
+          ),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _controller.biddersList.length,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () => Get.bottomSheet(
+                  BidderInfoSheet(userId: _controller.biddersList[index].user)),
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        UserIcon(
+                          radius: 17,
+                          userImage: currentUser[0].image,
+                        ),
+                        SizedBox(width: sm3),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(_userController.usersList[0].fullname,
+                                style: styleTitle),
+                            Text(_controller.biddersList[index].date,
+                                style: caption.copyWith(
+                                    fontSize: sm3, fontWeight: fwSemiBold)),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 3, horizontal: 7),
+                      decoration: BoxDecoration(
+                          borderRadius: borderRounded, color: colorWarning),
+                      child: Text(
+                          "₹${_controller.biddersList[index].biddingPrice}",
+                          style: styleTitle),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
@@ -156,18 +222,18 @@ class ProductDetailScreen extends StatelessWidget {
           children: [
             buildFeatureBox(
               label: "Starting Price",
-              count: _controller.productList[index].startingPrice.toString() +
+              count: product.startingPrice.toString() +
                   "/" +
-                  _controller.units[_controller.productList[index].unit].code,
+                  _controller.units[int.parse(product.unit)].code,
             ),
             buildFeatureBox(
               label: "Minimum Qty",
-              count: _controller.productList[index].minQty.toString() +
-                  _controller.units[_controller.productList[index].unit].code,
+              count: product.minQty.toString() +
+                  _controller.units[int.parse(product.unit)].code,
             ),
             buildFeatureBox(
               label: "Total Bid",
-              count: bidderList.length,
+              count: _controller.biddersList.length,
             ),
           ],
         ),
@@ -218,7 +284,7 @@ class ProductDetailScreen extends StatelessWidget {
               controller: _controller.bidPriceController,
             ),
             CustomButton(onPressed: () {
-              _controller.placeBid(pid: _controller.productList[index].id);
+              _controller.placeBid(pid: product.id);
               Get.back();
             }),
             SizedBox(height: 50),
