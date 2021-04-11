@@ -1,7 +1,9 @@
 import 'package:agrobid/models/user_model.dart';
 import 'package:agrobid/utils/firebase_constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:customize/customize.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,7 +23,6 @@ class UserController extends GetxController {
   @override
   void onInit() {
     _getname();
-    _getUsers();
     super.onInit();
   }
 
@@ -31,15 +32,6 @@ class UserController extends GetxController {
     } else {
       throw 'Could not launch $url';
     }
-  }
-
-  _getUsers() async {
-    QuerySnapshot snapshot = await usersRef.get();
-    snapshot.docs.forEach((element) {
-      _usersList.add(
-        UserModel.fromDocumentSnapshot(element),
-      );
-    });
   }
 
   _getname() async {
@@ -62,5 +54,19 @@ class UserController extends GetxController {
     await usersRef.doc(auth.currentUser.uid).update({
       "phone": newPhone,
     });
+  }
+
+  aboutApp(context) {
+    return showAboutDialog(
+      context: context,
+      applicationName: "Agrobid",
+      applicationVersion: "v0.0.1",
+      children: [
+        Text("Agrobid is an online platform to bid farming products.")
+            .wideLetter
+            .base,
+        Text("support@agrobid.com").color(FxColors.blueGray400),
+      ],
+    );
   }
 }

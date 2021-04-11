@@ -33,10 +33,9 @@ class AuthController extends GetxController {
         ..fullname = name
         ..email = email
         ..phone = phone
-        ..image = null
-        ..city = null
-        ..area = null
-        ..image = null;
+        ..image = "null"
+        ..city = "null"
+        ..area = "null";
       UserService.storeUserData(user);
       Get.offAll(() => AppLayout());
     } else {

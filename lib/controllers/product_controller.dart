@@ -17,26 +17,29 @@ class ProductController extends GetxController {
   var subcategorySelectedValue = RxString();
   var varietySelectedValue = RxString();
 
-  TextEditingController titleController = TextEditingController();
-  TextEditingController detailController = TextEditingController();
-  TextEditingController biddingPriceController = TextEditingController();
-  TextEditingController qtyController = TextEditingController();
-
-  TextEditingController bidQtyController = TextEditingController();
-  TextEditingController bidPriceController = TextEditingController();
-
-  RxList<ProductModel> _productsList = RxList<ProductModel>();
-  RxList<BidderModel> _biddersList = RxList<BidderModel>();
-
   RxList<UnitModel> _units = RxList<UnitModel>();
   RxList<CategoryModel> _categories = RxList<CategoryModel>();
   RxList<SubcategoryModel> _subcategories = RxList<SubcategoryModel>();
   RxList<VarietyModel> _varieties = RxList<VarietyModel>();
 
-  List<ProductModel> get productList => _productsList;
-  List<BidderModel> get biddersList => _biddersList;
+  Rx<List<ProductModel>> _productsList = Rx<List<ProductModel>>();
+  Rx<List<BidderModel>> _biddersList = Rx<List<BidderModel>>();
 
-  // get lists
+  // New product TextEditingController
+  TextEditingController titleController = TextEditingController();
+  TextEditingController detailController = TextEditingController();
+  TextEditingController biddingPriceController = TextEditingController();
+  TextEditingController qtyController = TextEditingController();
+
+  // Place bidding TextEditingController
+  TextEditingController bidQtyController = TextEditingController();
+  TextEditingController bidPriceController = TextEditingController();
+
+  // Getters
+  List<ProductModel> get productList => _productsList.value;
+  List<BidderModel> get biddersList => _biddersList.value;
+
+  // get lists of metadata
   List<UnitModel> get units => _units;
   List<CategoryModel> get categories => _categories;
   List<SubcategoryModel> get subcategories => _subcategories;
@@ -53,7 +56,7 @@ class ProductController extends GetxController {
 
   @override
   void onInit() {
-    _getProducts();
+    _productsList.bindStream(_getProducts());
     _getunits();
     _getcategory();
     _getsubcategory();
@@ -61,10 +64,34 @@ class ProductController extends GetxController {
     super.onInit();
   }
 
-  _getProducts() async {
-    QuerySnapshot snapshot = await productsRef.get();
-    snapshot.docs.forEach((element) {
-      _productsList.add(ProductModel.fromDocumentSnapshot(element));
+  getBiders({String pid}) {
+    _biddersList.bindStream(_getBiders(pid: pid));
+  }
+
+  Stream<List<ProductModel>> _getProducts() {
+    return productsRef
+        .orderBy("date", descending: false)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      List<ProductModel> pList = List.empty(growable: true);
+      snapshot.docs.forEach((doc) {
+        pList.add(ProductModel.fromDocumentSnapshot(doc));
+      });
+      return pList;
+    });
+  }
+
+  Stream<List<BidderModel>> _getBiders({String pid}) {
+    return biddersRef
+        .where("productId", isEqualTo: pid)
+        .orderBy("date", descending: true)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      List<BidderModel> bList = List.empty(growable: true);
+      snapshot.docs.forEach((doc) {
+        bList.add(BidderModel.fromDocumentSnapshot(doc));
+      });
+      return bList;
     });
   }
 
@@ -93,14 +120,6 @@ class ProductController extends GetxController {
     QuerySnapshot snapshot = await varitiesRef.get();
     snapshot.docs.forEach((element) {
       _varieties.add(VarietyModel.fromDocumentSnapshot(element));
-    });
-  }
-
-  getBiders({String pid}) async {
-    QuerySnapshot snapshot =
-        await biddersRef.where("productId", isEqualTo: pid).get();
-    snapshot.docs.forEach((element) {
-      _biddersList.add(BidderModel.fromDocumentSnapshot(element));
     });
   }
 

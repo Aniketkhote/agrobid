@@ -63,29 +63,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         buildInkMenuItem(
           icon: Icons.help,
           menu: "About",
-          onTap: () => showAboutDialog(
-            context: context,
-            applicationName: "Agrobid",
-            applicationVersion: "v0.0.1",
-            children: [
-              Text("Agrobid is an online platform to bid farming products.")
-                  .wideLetter
-                  .base,
-              Text("support@agrobid.com").color(FxColors.blueGray400),
-            ],
-          ),
+          onTap: () => _userController.aboutApp(context),
         ),
-        buildLogoutButton(),
+        CustomButton(
+          text: "Logout",
+          backgroundColor: FxColors.red500,
+          onPressed: () => _authController.logout(),
+        ).px32.pt(top: 60),
       ],
     );
-  }
-
-  Widget buildLogoutButton() {
-    return CustomButton(
-      text: "Logout",
-      backgroundColor: FxColors.red500,
-      onPressed: () => _authController.logout(),
-    ).px32.pt(top: 60);
   }
 
   Widget buildInkMenuItem({String menu, IconData icon, Function onTap}) {

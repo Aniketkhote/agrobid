@@ -9,14 +9,14 @@ import '../../widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'widgets/bidder_list.dart';
+import 'widgets/bidder_info_sheet.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  final int index;
   final product;
-  final ProductController _controller = Get.put(ProductController());
+  final ProductController _controller = Get.find<ProductController>();
+  final UserController _userController = Get.put(UserController());
 
-  ProductDetailScreen(this.index, {this.product});
+  ProductDetailScreen({this.product});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,9 +48,7 @@ class ProductDetailScreen extends StatelessWidget {
                           height: 15,
                           indent: 30,
                         ),
-                        _controller.biddersList.length != 0
-                            ? buildBidderList(productId: product.id)
-                            : SizedBox.shrink(),
+                        // buildBidderList(productId: product.id)
                       ],
                     ),
                   ),
@@ -111,60 +109,74 @@ class ProductDetailScreen extends StatelessWidget {
   }
 
   Widget buildBidderList({String productId}) {
-    final UserController _userController = Get.put(UserController());
     return Container(
+      width: FxWidth.w100,
       padding: EdgeInsets.only(bottom: 60),
       margin: EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Bidders {$productId}",
+            "Bidders",
             style: styleTitle.copyWith(fontSize: 18),
           ),
-          ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: _controller.biddersList.length,
-            itemBuilder: (context, index) => InkWell(
-              onTap: () => Get.bottomSheet(
-                  BidderInfoSheet(userId: _controller.biddersList[index].user)),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        UserIcon(
-                          radius: 17,
-                          userImage: currentUser[0].image,
-                        ),
-                        SizedBox(width: sm3),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(_userController.usersList[0].fullname,
+          GetX<ProductController>(
+            init: Get.find<ProductController>(),
+            builder: (ProductController productController) {
+              if (productController.biddersList.length != 0) {
+                return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: productController.biddersList.length,
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () async {
+                      Get.bottomSheet(BidderInfoSheet(user: null));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              UserIcon(
+                                radius: 17,
+                                userImage: currentUser[0].image,
+                              ),
+                              SizedBox(width: sm3),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(_userController.usersList[0].fullname,
+                                      style: styleTitle),
+                                  Text(
+                                      productController.biddersList[index].date,
+                                      style: caption.copyWith(
+                                          fontSize: sm3,
+                                          fontWeight: fwSemiBold)),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 3, horizontal: 7),
+                            decoration: BoxDecoration(
+                                borderRadius: borderRounded,
+                                color: colorWarning),
+                            child: Text(
+                                "₹${productController.biddersList[index].biddingPrice}",
                                 style: styleTitle),
-                            Text(_controller.biddersList[index].date,
-                                style: caption.copyWith(
-                                    fontSize: sm3, fontWeight: fwSemiBold)),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 3, horizontal: 7),
-                      decoration: BoxDecoration(
-                          borderRadius: borderRounded, color: colorWarning),
-                      child: Text(
-                          "₹${_controller.biddersList[index].biddingPrice}",
-                          style: styleTitle),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
+                );
+              } else {
+                return Text("No Bidder").pt32.center;
+              }
+            },
           ),
         ],
       ),
@@ -231,10 +243,10 @@ class ProductDetailScreen extends StatelessWidget {
               count: product.minQty.toString() +
                   _controller.units[int.parse(product.unit)].code,
             ),
-            buildFeatureBox(
-              label: "Total Bid",
-              count: _controller.biddersList.length,
-            ),
+            // buildFeatureBox(
+            //   label: "Total Bid",
+            //   count: _controller.biddersList.length,
+            // ),
           ],
         ),
       ),

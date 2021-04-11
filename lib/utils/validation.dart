@@ -13,10 +13,10 @@ final emailValidator = MultiValidator([
 
 final phoneValidator = MultiValidator([
   RequiredValidator(errorText: 'phone is required'),
+  PatternValidator(r'(^([789]{1}[0-9]{9}))',
+      errorText: 'enter valid phone number'),
   MinLengthValidator(10, errorText: "phone should be 10 digit"),
   MaxLengthValidator(10, errorText: "phone should be 10 digit"),
-  PatternValidator(r'(^(0|[1-9][0-9]{0,9})$)',
-      errorText: 'enter valid phone number'),
 ]);
 
 final passwordValidator = MultiValidator([
